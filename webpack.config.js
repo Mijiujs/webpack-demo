@@ -1,3 +1,5 @@
+// HtmlWebPackPlugin 会在打包结束后,自动生成一个html文件，并把打包生成的js自动引入到这个html文件中
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 const path = require('path')
 module.exports = {
     mode: 'production', // 默认
@@ -57,5 +59,8 @@ module.exports = {
                 }
             }
         }]
-    }
+    },
+    plugins:[new HtmlWebPackPlugin({
+        template:'./src/index.html'
+    })]
 }
