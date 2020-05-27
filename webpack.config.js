@@ -36,13 +36,18 @@ module.exports = {
             use: ['style-loader', 'css-loader', 'postcss-loader']
         }, {
             test: /\.scss$/,
-            // 执行顺序 从上到下，从右到左
-            use: ['style-loader', {
-                loader: 'css-loader',
-                options: {
-                    importLoaders: 2
-                }
-            }, 'sass-loader', 'postcss-loader']
+            // 执行顺序 从下到上，从右到左
+            use: [
+                'style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 2, // import引入的文件也走下面两个loader
+                        modules: true // css模块化
+                    }
+                },
+                'sass-loader',
+                'postcss-loader']
         }]
     }
 }
