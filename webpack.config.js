@@ -1,15 +1,16 @@
-// HtmlWebPackPlugin 会在打包结束后,自动生成一个html文件，并把打包生成的js自动引入到这个html文件中
-const HtmlWebPackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path')
 module.exports = {
-    mode: 'production', // 默认
-    entry: {
+    mode: 'production', // 模式，默认两种 production和development
+    entry: { // 入口，从哪个文件开始打包
         main: './src/index.js',
+        app:'./src/app.js'
     },
-    output: {
-        filename: 'main.js',
-        // __dirname 当前webpack.config.js文件所在的目录
-        path: path.resolve(__dirname, 'dist')
+    output: { // 出口
+        // publicPath:'http://cdn.com.cn',
+        filename: '[name].js', // 打包后的文件名
+        path: path.resolve(__dirname, 'dist') // 路径必须是一个绝对路径,__dirname 当前webpack.config.js文件所在的目录
     },
     module: {
         rules: [{
@@ -22,7 +23,6 @@ module.exports = {
             //         outputPath: 'images/',
             //     },
             // },
-
             // url-loader 图片很小用url-loader
             use: {
                 loader: 'url-loader',
@@ -60,7 +60,12 @@ module.exports = {
             }
         }]
     },
-    plugins:[new HtmlWebPackPlugin({
-        template:'./src/index.html'
-    })]
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './src/index.html',       // 指定要打包的模板
+            filename: 'index.html',             // 打包后生成的文件
+        }),
+        new CleanWebpackPlugin()
+    ],
+
 }

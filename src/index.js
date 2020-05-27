@@ -1,5 +1,3 @@
-// webpack是模块打包工具
-
 // demo1
 // let Header = require('./demo1/header.js') // CommonJS引入方式
 // import Content from './demo1/content.js' // ES Moudule 模块引入方式
