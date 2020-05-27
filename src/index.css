@@ -1,1 +1,12 @@
-@import './avatar.css'
+/* @import './avatar.css' */
+.avatar {
+    height: 150px;
+    width: 150px;
+    transform: translate(100px, 100px);
+}
+.flex-box{
+    display: flex;
+}
+.flex-item{
+    flex:1
+}

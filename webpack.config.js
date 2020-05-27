@@ -13,11 +13,14 @@ module.exports = {
         rules: [{
             test: /\.jpg$/,
             // file-loader
-            // loader: 'file-loader',
-            // options: {
-            //     name:'[name].[ext]',
-            //     outputPath: 'images/',
+            // use: {
+            //     loader: 'file-loader',
+            //     options: {
+            //         name: '[name].[ext]',
+            //         outputPath: 'images/',
+            //     },
             // },
+
             // url-loader 图片很小用url-loader
             use: {
                 loader: 'url-loader',
@@ -30,11 +33,16 @@ module.exports = {
             }
         }, {
             test: /\.css$/,
-            use: ['style-loader', 'css-loader']
+            use: ['style-loader', 'css-loader', 'postcss-loader']
         }, {
             test: /\.scss$/,
             // 执行顺序 从上到下，从右到左
-            use: ['style-loader', 'css-loader','sass-loader','postcss-loader']
+            use: ['style-loader', {
+                loader: 'css-loader',
+                options: {
+                    importLoaders: 2
+                }
+            }, 'sass-loader', 'postcss-loader']
         }]
     }
 }
