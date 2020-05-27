@@ -2,10 +2,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path')
 module.exports = {
-    mode: 'production', // 模式，默认两种 production和development
+    mode: 'development', // 模式，两种production和development,默认production
+    devtool:'source-map',
     entry: { // 入口，从哪个文件开始打包
         main: './src/index.js',
-        app:'./src/app.js'
+        // demo1: './src/demo1/demo1.js',
+        // demo2: './src/demo2/demo2.js',
+        // demo3:'./src/demo3/demo3.js'
     },
     output: { // 出口
         // publicPath:'http://cdn.com.cn',

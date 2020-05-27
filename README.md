@@ -9,3 +9,5 @@ demo3 字体iconfont用file-loader
 #plugin 可以再webpack运行到某个时刻的时候,帮你做一些事情
 HtmlWebpackPlugin 打包结束后,自动生成一个html文件，并把打包生成的js自动引入到这个html文件中
 CleanWebpackPlugin 打包之前清除打包目录
+---
+sourceMap 它是一个映射关系，映射出当前具体是哪个文件哪个位置出错
