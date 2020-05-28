@@ -30,7 +30,8 @@ module.exports = {
         // demo1: './src/demo1/demo1.js',
         // demo2: './src/demo2/demo2.js',
         // demo3:'./src/demo3/demo3.js',
-        demo4: './src/demo4/demo4.js'
+        // demo4: './src/demo4/demo4.js',
+        demo5: './src/demo5/demo5.js'
     },
     // 出口
     output: {
@@ -90,6 +91,34 @@ module.exports = {
                 },
                 'sass-loader',
                 'postcss-loader']
+        }, {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: "babel-loader",
+            options: {
+                // 'presets': [['@babel/preset-env', {
+                //     "targets": {
+                //         "edge": "17",
+                //         "firefox": "60",
+                //         "chrome": "67",
+                //         "safari": "11.1",
+                //     }, 
+                //     useBuiltIns: 'usage'
+                // }]],
+                'plugins': [
+                    [
+                        "@babel/plugin-transform-runtime",
+                        {
+                            "absoluteRuntime": false,
+                            "corejs": 2,
+                            "helpers": true,
+                            "regenerator": true,
+                            "useESModules": false,
+                            "version": "7.0.0-beta.0"
+                        }
+                    ]
+                ]
+            }
         }]
     },
     plugins: [

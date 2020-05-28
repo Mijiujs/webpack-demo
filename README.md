@@ -14,6 +14,75 @@ demo4
 模块热替换HMR Hot Module Replacement 热模块更新
 css文件不用 因为css-loader已帮忙实现
 
+demo5
+babel es6->es5
+npm install --save-dev babel-loader @babel/core
+在webpack.config.js中
+module: {
+  rules: [
+      { 
+          test: /\.js$/, 
+          exclude: /node_modules/, 
+          loader: "babel-loader",  
+
+      }
+  ]
+}
+babel-loader实现了转换，但是还不够，有些变量需要被注入进来
+
+配合工具1 preset
+使用场景：只是业务代码
+1.安装
+npm install @babel/preset-env --save-dev
+2.在babel-loader的options中放入
+options: {
+      'presets': ['@babel/preset-env']
+}
+3.精简，不用的语法不引入，只引入业务代码中涉及到的语法
+npm install --save @babel/polyfill 
+4.在babel-loader的options改成
+options: {
+      'presets': [['@babel/preset-env', {
+            // 高级浏览器不用转换
+            "targets": {
+            "edge": "17",
+            "firefox": "60",
+            "chrome": ">67",
+            "safari": "11.1",
+            }, 
+            useBuiltIns: 'usage'
+      }]]
+}
+5.在对应js文件
+import "@babel/polyfill";
+polyfill会污染全局环境
+
+配合工具2 plugin runtime
+使用场景：生成第三方文件，打包库
+1.安装
+npm install --save-dev @babel/plugin-transform-runtime
+npm install --save @babel/runtime
+2.在babel-loader的options中放入
+options: {
+     'plugins': [
+            [
+                  "@babel/plugin-transform-runtime",
+                  {
+                        "absoluteRuntime": false,
+                        "corejs": false,
+                        "helpers": true,
+                        "regenerator": true,
+                        "useESModules": false,
+                        "version": "7.0.0-beta.0"
+                  }
+            ]
+      ]
+}
+把corejs改成2（只引入用到的代码）
+安装
+npm install --save @babel/runtime-corejs2
+如果options太多，可以新建文件.babelrc并放入
+
 ---
 
 # plugin 可以再webpack运行到某个时刻的时候,帮你做一些事情
