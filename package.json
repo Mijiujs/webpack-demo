@@ -7,8 +7,8 @@
   "license": "ISC",
   "scripts": {
     "server": "node server.js",
-    "dev": "webpack-dev-server --config webpack.dev.js",
-    "build": "webpack  --config webpack.prod.js"
+    "dev": "webpack-dev-server --config  ./build/webpack.dev.js",
+    "build": "webpack  --config ./build/webpack.prod.js"
   },
   "browserslist": [
     "defaults",
