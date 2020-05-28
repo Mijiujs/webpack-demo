@@ -10,4 +10,8 @@ demo3 字体iconfont用file-loader
 HtmlWebpackPlugin 打包结束后,自动生成一个html文件，并把打包生成的js自动引入到这个html文件中
 CleanWebpackPlugin 打包之前清除打包目录
 ---
-sourceMap 它是一个映射关系，映射出当前具体是哪个文件哪个位置出错
+#devtool 值以下
+source-map 它是一个映射关系，映射出当前具体是哪个文件哪个位置出错,打包后会出现.map文件
+inline-source-map .map被合并到文件内
+开发环境 devtool:'cheap-module-eval-source-map'
+生产环境 devtool:'cheap-module-source-map' 不产生文件，不产生列
