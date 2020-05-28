@@ -11,7 +11,7 @@ module.exports = {
     // devtool:'cheap-module-source-map', // production
 
     devServer: {
-        // contentBase: './dist', // 代表html页面所在的相对路径
+        contentBase: './dist', // 代表html页面所在的相对路径
         // publicPath 影响本地在开发环境中的访问
         open: true, // 打开浏览器
         port:8090,
@@ -38,6 +38,7 @@ module.exports = {
     // 出口
     output: {
         // publicPath:'http://cdn.com.cn', // 资源放在cdn上 统一为资源配置
+        // publicPath:'/',
         filename: 'main.js', // 打包后的文件名
         path: path.resolve(__dirname, 'dist') // 路径必须是一个绝对路径,__dirname 当前webpack.config.js文件所在的目录
     },
@@ -92,7 +93,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html',       // 指定要打包的模板
+            template: 'src/index.html',       // 指定要打包的模板
             filename: 'index.html',             // 打包后生成的文件
         }),
         new CleanWebpackPlugin()
