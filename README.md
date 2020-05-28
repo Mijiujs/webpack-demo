@@ -1,22 +1,24 @@
 # webpack-demo
 
-demo1 
+###demo1 
 webpack模块打包器，可支持commonjs和ES6的模块语法，也包括amd，cmd等等
 
-demo2 
+###demo2 
 图片可用file-loader，url-loader（小于多少大小直接转base64）
 css相关 用css-loader style-loader scss-loader postcss-loader(可以为css高级属性默认添加浏览器前缀),postcss-loader记得配置postcss.config.js文件,使用autoprefixer
 
-demo3 
+###demo3 
 字体iconfont用file-loader
 
-demo4 
+###demo4 
 模块热替换HMR Hot Module Replacement 热模块更新
 css文件不用 因为css-loader已帮忙实现
 
-demo5
+###demo5
 babel es6->es5
+```
 npm install --save-dev babel-loader @babel/core
+```
 在webpack.config.js中
 module: {
   rules: [
@@ -24,7 +26,6 @@ module: {
           test: /\.js$/, 
           exclude: /node_modules/, 
           loader: "babel-loader",  
-
       }
   ]
 }
