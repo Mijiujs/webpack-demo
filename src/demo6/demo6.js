@@ -1,2 +1,2 @@
 import {add} from './math.js'
-add(3,8) 
+add(3,1) 
