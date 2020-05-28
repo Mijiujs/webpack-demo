@@ -1,6 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const path = require('path')
+const webpack = require('webpack')
+
 module.exports = {
 
     // 模式，2种：生产模式(production)和开发模式(development)
@@ -14,37 +16,33 @@ module.exports = {
         contentBase: './dist', // 代表html页面所在的相对路径
         // publicPath 影响本地在开发环境中的访问
         open: true, // 打开浏览器
-        port:8090,
+        port: 8090,
+        hot: true,
+        hotOnly: true
         // proxy:{
         //     '/api':'http://localhost:3000'
         // }
     },
-
-    // 监听
-    // watch: true,
-    // watchOptions: {
-    //     poll: 1000, // 每秒询问多少次
-    //     aggregateTimeout: 500,  //防抖 多少毫秒后再次触发
-    //     ignored: /node_modules/ //忽略时时监听
-    // },
 
     // 入口，从哪个文件开始打包
     entry: {
         main: './src/index.js',
         // demo1: './src/demo1/demo1.js',
         // demo2: './src/demo2/demo2.js',
-        // demo3:'./src/demo3/demo3.js'
+        // demo3:'./src/demo3/demo3.js',
+        demo4: './src/demo4/demo4.js'
     },
     // 出口
     output: {
         // publicPath:'http://cdn.com.cn', // 资源放在cdn上 统一为资源配置
         // publicPath:'/',
-        filename: 'main.js', // 打包后的文件名
+        filename: '[name].js', // 打包后的文件名
         path: path.resolve(__dirname, 'dist') // 路径必须是一个绝对路径,__dirname 当前webpack.config.js文件所在的目录
     },
     // loader
     module: {
         rules: [{
+            // 图片文件
             test: /\.(jpg|png|gif)$/,
             // file-loader
             // use: {
@@ -65,11 +63,22 @@ module.exports = {
                 }
             }
         }, {
+            // 字体文件
+            test: /\.(eot|ttf|svg|woff)$/,
+            use: {
+                loader: 'file-loader',
+                options: {
+                    outputPath: '/font'
+                }
+            }
+        }, {
+            // scc文件
             test: /\.css$/,
+            // 执行顺序 从下到上，从右到左
             use: ['style-loader', 'css-loader', 'postcss-loader']
         }, {
+            // scss文件
             test: /\.scss$/,
-            // 执行顺序 从下到上，从右到左
             use: [
                 'style-loader',
                 {
@@ -81,14 +90,6 @@ module.exports = {
                 },
                 'sass-loader',
                 'postcss-loader']
-        }, {
-            test: /\.(eot|ttf|svg|woff)$/,
-            use: {
-                loader: 'file-loader',
-                options: {
-                    outputPath: '/font'
-                }
-            }
         }]
     },
     plugins: [
@@ -96,7 +97,8 @@ module.exports = {
             template: 'src/index.html',       // 指定要打包的模板
             filename: 'index.html',             // 打包后生成的文件
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ],
 
 }
