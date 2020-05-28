@@ -6,10 +6,9 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
     "server": "node server.js",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack  --config webpack.prod.js"
   },
   "browserslist": [
     "defaults",
@@ -18,7 +17,9 @@
     "ios 7",
     "last 3 ios versions"
   ],
-  "sideEffects":["*.css"],
+  "sideEffects": [
+    "*.css"
+  ],
   "devDependencies": {
     "@babel/core": "^7.10.1",
     "@babel/plugin-transform-runtime": "^7.10.1",

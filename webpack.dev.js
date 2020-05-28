@@ -4,7 +4,6 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-
     // 模式，2种：生产模式(production)和开发模式(development)
     // 开发模式不压缩打包后代码，生产模式压缩打包后代码
     mode: 'development',
@@ -19,7 +18,7 @@ module.exports = {
         open: true, // 打开浏览器
         port: 8090,
         hot: true,
-        hotOnly: true
+        // hotOnly: true
         // proxy:{
         //     '/api':'http://localhost:3000'
         // }
@@ -32,7 +31,8 @@ module.exports = {
         // demo2: './src/demo2/demo2.js',
         // demo3:'./src/demo3/demo3.js',
         // demo4: './src/demo4/demo4.js',
-        // demo5: './src/demo5/demo5.js'
+        // demo5: './src/demo5/demo5.js',
+        demo6: './src/demo6/demo6.js'
     },
     // 出口
     output: {
@@ -130,7 +130,7 @@ module.exports = {
         new CleanWebpackPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ],
-    // optimization: {
-    //     usedExports: true
-    // }
+    optimization: {
+        usedExports: true
+    }
 }
