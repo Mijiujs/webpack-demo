@@ -160,3 +160,6 @@ inline-source-map .map被合并到文件内
 2.webpack-dev-server 需要安装，帮我们启动服务器，打包代码到dist目录下(放到内存里),可以打开浏览器并且刷新
 3.自己写服务器 其实就是node server.js，要引入webpack-dev-middleware
 ***
+
+# code splitting
+假设main.js打包文件后很大，加载时间很长。如果改变业务代码，重新打开页面又要重新加载main.js

@@ -8,7 +8,8 @@
   "scripts": {
     "server": "node server.js",
     "dev": "webpack-dev-server --config  ./build/webpack.dev.js",
-    "build": "webpack  --config ./build/webpack.prod.js"
+    "build": "webpack  --config ./build/webpack.prod.js",
+    "dev-build": "webpack --config ./build/webpack.dev.js "
   },
   "browserslist": [
     "defaults",
@@ -45,6 +46,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.10.1",
     "@babel/runtime": "^7.10.1",
-    "@babel/runtime-corejs2": "^7.10.1"
+    "@babel/runtime-corejs2": "^7.10.1",
+    "lodash": "^4.17.15"
   }
 }
