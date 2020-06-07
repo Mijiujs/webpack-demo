@@ -24,6 +24,7 @@ const devConfig = {
 
     // 入口，从哪个文件开始打包
     entry: {
+        main1: './src/index1.js',
         main: './src/index.js',
         // demo1: './src/demo1/demo1.js',
         // demo2: './src/demo2/demo2.js',
