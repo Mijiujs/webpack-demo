@@ -24,14 +24,8 @@ const devConfig = {
 
     // 入口，从哪个文件开始打包
     entry: {
-        main1: './src/index1.js',
         main: './src/index.js',
-        // demo1: './src/demo1/demo1.js',
-        // demo2: './src/demo2/demo2.js',
-        // demo3:'./src/demo3/demo3.js',
-        // demo4: './src/demo4/demo4.js',
-        // demo5: './src/demo5/demo5.js',
-        // demo6: './src/demo6/demo6.js'
+        // demo7: './src/demo7/demo7.js'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()

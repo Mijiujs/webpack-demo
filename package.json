@@ -9,7 +9,7 @@
     "server": "node server.js",
     "dev": "webpack-dev-server --config  ./build/webpack.dev.js",
     "build": "webpack  --config ./build/webpack.prod.js",
-    "dev-build": "webpack --config ./build/webpack.dev.js "
+    "dev-build": "webpack --profile --json > stats.json --config ./build/webpack.dev.js "
   },
   "browserslist": [
     "defaults",
@@ -23,6 +23,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.10.1",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.1",
     "autoprefixer": "^9.8.0",

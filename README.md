@@ -136,12 +136,58 @@ optimization: {
 ```
 ***
 
+### demo7
+code splitting:代码分割
+
+在webpack.config.js中
+```
+optimization: {
+      splitChunks: {
+      chunks: 'all'
+      }
+}
+```
+参数详细说明
+```
+ optimization: {
+      // code splitting
+      splitChunks: {
+            chunks: "all", // async：异步（默认） all：所有 initial：只对同步
+            minSize: 30000, // 引入文件大于30000字节才做分割
+            minChunks: 1, // 当一个代码被引入了多少次才被分割
+            maxAsyncRequests: 5, // 同时加载的模块数最多是5个，前5个分割，之后不分割
+            maxInitialRequests: 3, // 入口文件最多分割出3个
+            automaticNameDelimiter: '~', // 生成文件中间的连接符
+            name: true,
+            cacheGroups: {
+                  vendors: {
+                        // 如果引入的库来自node_modules
+                        test: /[\\/]node_modules[\\/]/,
+                        priority: -10, // 优先级，谁大谁先
+                        filename:'vendors.js'
+                  },
+                  default: {
+                        priority: -20,
+                        reuseExistingChunk: true, // 如果一个模块被打包过了那么久忽略这个模块直接使用之前被打包的模块
+                        filename:'default.js'
+                  }
+            }
+      }
+}
+```
+
+
 # plugin 
 可以再webpack运行到某个时刻的时候,帮你做一些事情
 ### HtmlWebpackPlugin 
 打包结束后,自动生成一个html文件，并把打包生成的js自动引入到这个html文件中
+
+https://www.webpackjs.com/plugins/html-webpack-plugin/
 ### CleanWebpackPlugin 
 打包之前清除打包目录
+### SplitChunksPlugin
+https://www.webpackjs.com/plugins/split-chunks-plugin/
+### babel-plugin-dynamic-import-webpack
 ***
 
 # devtool 值以下
@@ -161,5 +207,19 @@ inline-source-map .map被合并到文件内
 3.自己写服务器 其实就是node server.js，要引入webpack-dev-middleware
 ***
 
-# code splitting
-假设main.js打包文件后很大，加载时间很长。如果改变业务代码，重新打开页面又要重新加载main.js
+# 打包分析,Preloading,prefetching
+https://github.com/webpack/analyse
+
+package.json script中 
+```
+webpack --profile --json > stats.json
+```
+目录下会多出stats.json，可以在http://webpack.github.io/analyse/进行分析
+```
+/*webpackPrefetch:true*/ //等主流程结束后空闲才回去加载，推荐
+/*webpackPreLoad:true*/  //和主流程一起加载
+```
+
+
+
+

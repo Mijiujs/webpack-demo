@@ -96,4 +96,20 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
     ],
+    optimization: {
+        // code splitting
+        splitChunks: {
+            chunks: "all", // async：异步（默认） all：所有 initial：只对同步
+            minSize: 30000, // 引入文件大于30000字节才做分割
+            minChunks: 1, // 当一个代码被引入了多少次才被分割
+            maxAsyncRequests: 5, // 同时加载的模块数最多是5个，前5个分割，之后不分割
+            maxInitialRequests: 3, // 入口文件最多分割出3个
+            automaticNameDelimiter: '~', // 生成文件中间的连接符
+            name: true,
+            cacheGroups: {
+                vendors: false,
+                default: false
+            }
+        }
+    },
 }
