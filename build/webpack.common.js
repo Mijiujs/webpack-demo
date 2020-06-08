@@ -1,15 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const path = require('path')
 
 module.exports = {
-    output: {
-        // publicPath:'http://cdn.com.cn', // 资源放在cdn上 统一为资源配置
-        // publicPath:'/',
-        filename: '[name].js', // 打包后的文件名
-        chunkFilename: '[name].chunk.js',
-        path: path.resolve(__dirname, '../dist')  // 路径必须是一个绝对路径,__dirname 当前webpack.config.js文件所在的目录
-    },
     module: {
         rules: [{
             // 图片文件

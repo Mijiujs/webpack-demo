@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const commonConfig = require('./webpack.common.js')
+const path = require('path')
 
 const devConfig = {
     // 模式，2种：生产模式(production)和开发模式(development)
@@ -53,7 +54,12 @@ const devConfig = {
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ],
-
+    output: {
+        // publicPath:'http://cdn.com.cn', // 资源放在cdn上 统一为资源配置
+        filename: '[name].js', // 打包后的文件名
+        chunkFilename: '[name].js',
+        path: path.resolve(__dirname, '../dist')  // 路径必须是一个绝对路径,__dirname 当前webpack.config.js文件所在的目录
+    }
 }
 
 module.exports = merge(commonConfig, devConfig)

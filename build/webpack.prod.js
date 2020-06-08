@@ -1,6 +1,8 @@
 const merge = require('webpack-merge')
 const commonConfig = require('./webpack.common.js')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require('path')
+
 const prodConfig = {
     mode: 'production',
     devtool: 'cheap-module-source-map',
@@ -9,8 +11,8 @@ const prodConfig = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename:'[name].css',
-            chunkFilename:'[name].chunk.css'
+            filename: '[name].css',
+            chunkFilename: '[name].chunk.css'
         })
     ],
     module: {
@@ -36,6 +38,12 @@ const prodConfig = {
                     'postcss-loader']
             },
         ]
+    },
+    output: {
+        // publicPath:'http://cdn.com.cn', // 资源放在cdn上 统一为资源配置
+        filename: '[name].[contenthash].js', // 内容不变contenthash不变
+        chunkFilename: '[name].[contenthash].js',
+        path: path.resolve(__dirname, '../dist')  // 路径必须是一个绝对路径,__dirname 当前webpack.config.js文件所在的目录
     }
 }
 module.exports = merge(commonConfig, prodConfig)
