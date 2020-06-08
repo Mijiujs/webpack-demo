@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-
+const webpack = require('webpack')
 module.exports = {
     module: {
         rules: [{
@@ -69,6 +69,10 @@ module.exports = {
             filename: 'index.html',             // 打包后生成的文件
         }),
         new CleanWebpackPlugin(),
+        // 当发现在一个模块用了$字符串，那么在那个文件自动引入jquery
+        new webpack.ProvidePlugin({
+            $:'jquery'
+        }),
     ],
     optimization: {
         usedExports: true,

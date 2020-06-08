@@ -257,6 +257,23 @@ webpack --profile --json > stats.json
 /*webpackPrefetch:true*/ //等主流程结束后空闲才回去加载，推荐
 /*webpackPreLoad:true*/  //和主流程一起加载
 ```
+# shimming
+多个文件需要使用某个第三方库,不用一个一个文件引入，可以使用shimming
+```
+// 当发现在一个模块用了$字符串，那么在那个文件自动引入jquery
+new webpack.ProvidePlugin({
+      $:'jquery'
+}),
+```
+让每个某块的this指向window对象,对某个js文件引用imports-loader
+```
+npm install imports-loader --save-dev
+
+loader:'imports-loader?this=>window'
+```
+
+
+
 
 
 
