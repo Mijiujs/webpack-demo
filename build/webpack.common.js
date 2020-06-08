@@ -7,6 +7,7 @@ module.exports = {
         // publicPath:'http://cdn.com.cn', // 资源放在cdn上 统一为资源配置
         // publicPath:'/',
         filename: '[name].js', // 打包后的文件名
+        chunkFilename: '[name].chunk.js',
         path: path.resolve(__dirname, '../dist')  // 路径必须是一个绝对路径,__dirname 当前webpack.config.js文件所在的目录
     },
     module: {
@@ -40,25 +41,6 @@ module.exports = {
                     outputPath: '/font'
                 }
             }
-        }, {
-            // scc文件
-            test: /\.css$/,
-            // 执行顺序 从下到上，从右到左
-            use: ['style-loader', 'css-loader', 'postcss-loader']
-        }, {
-            // scss文件
-            test: /\.scss$/,
-            use: [
-                'style-loader',
-                {
-                    loader: 'css-loader',
-                    options: {
-                        importLoaders: 2, // import引入的文件也走下面两个loader
-                        modules: true // css模块化
-                    }
-                },
-                'sass-loader',
-                'postcss-loader']
         }, {
             test: /\.js$/,
             exclude: /node_modules/,
@@ -97,6 +79,7 @@ module.exports = {
         new CleanWebpackPlugin(),
     ],
     optimization: {
+        usedExports: true,
         // code splitting
         splitChunks: {
             chunks: "all", // async：异步（默认） all：所有 initial：只对同步

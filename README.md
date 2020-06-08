@@ -188,6 +188,44 @@ https://www.webpackjs.com/plugins/html-webpack-plugin/
 ### SplitChunksPlugin
 https://www.webpackjs.com/plugins/split-chunks-plugin/
 ### babel-plugin-dynamic-import-webpack
+
+### MiniCssExtractPlugin
+https://www.npmjs.com/package/mini-css-extract-plugin
+将CSS提取为独立的文件的插件，对每个包含css的js文件都会创建一个CSS文件，支持按需加载css和sourceMap，如果要压缩css使用下面那个插件
+### extract-text-webpack-plugin
+
+```
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+module.exports = {
+      plugins: [
+            new MiniCssExtractPlugin({})
+      ],
+      module: {
+            rules: [
+                  {
+                        // scc文件
+                        test: /\.css$/,
+                        // 执行顺序 从下到上，从右到左
+                        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+                  }, {
+                        // scss文件
+                        test: /\.scss$/,
+                        use: [
+                              MiniCssExtractPlugin.loader,
+                              {
+                              loader: 'css-loader',
+                              options: {
+                                    importLoaders: 2, // import引入的文件也走下面两个loader
+                                    modules: true // css模块化
+                              }
+                              },
+                              'sass-loader',
+                              'postcss-loader']
+                  },
+            ]
+      }
+}
+```
 ***
 
 # devtool 值以下
